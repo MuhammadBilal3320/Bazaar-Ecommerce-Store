@@ -53,7 +53,7 @@ const Navbar = ({ setSideBar, setCurrentPage }) => {
 
     const searchSubmitHandler = (e) => {
         e.preventDefault();
-        navigate(keyword.trim() ? `/product/${keyword}` : '/');
+        navigate(keyword.trim() ? `/product/${keyword}` : '');
     };
 
     const handleLogout = async () => {
@@ -353,10 +353,6 @@ li {
     transition: width 0.3s ease-in-out;
     border-radius: 6px;
 
-    &:focus-within {
-        width: 80%;
-        transition: width 0.3s ease-in-out;
-    }
 
     >input {
         background-color: transparent;
