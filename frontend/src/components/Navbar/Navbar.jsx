@@ -19,11 +19,11 @@ const navItems = [
 
 // User Menu Items (Dynamic Based on Authentication)
 const getUserMenuItems = (isAuthenticated, user, handleLogout) => [
-    { path: "/registration", label: "SIGN UP", show: !isAuthenticated },
-    { path: "/login", label: "SIGN IN", show: !isAuthenticated },
-    { path: "/dashboard", label: "DASHBOARD", icon: <RiDashboardFill />, show: isAuthenticated && (user?.role === "admin" || user?.role === "master") },
-    { path: "/userProfile", label: "PROFILE", icon: <CgProfile />, show: isAuthenticated },
-    { path: "/logout", label: "LOGOUT", icon: <AiOutlineLogout />, show: isAuthenticated, onClick: handleLogout }
+    { path: "/registration", label: "Sign up", show: !isAuthenticated },
+    { path: "/login", label: "Sign in", show: !isAuthenticated },
+    { path: "/dashboard", label: "Dashboard", icon: <RiDashboardFill />, show: isAuthenticated && (user?.role === "admin" || user?.role === "master") },
+    { path: "/userProfile", label: "Profile", icon: <CgProfile />, show: isAuthenticated },
+    { path: "/logout", label: "Logout", icon: <AiOutlineLogout />, show: isAuthenticated, onClick: handleLogout }
 ];
 
 const Navbar = ({ setSideBar, setCurrentPage }) => {
@@ -83,7 +83,8 @@ const Navbar = ({ setSideBar, setCurrentPage }) => {
                                 .filter(item => item.show)
                                 .map((item, index) => (
                                     <Link key={index} className="noUnderline menuList" to={item.path} onClick={item.onClick}>
-                                        <li>{item.icon} {item.label}</li>
+                                        <li>{item.icon}</li>
+                                        <li>{item.label}</li>
                                     </Link>
                                 ))}
                         </ul>
@@ -216,6 +217,10 @@ const Nav = styled.nav`
 }
 
 .userMenu{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
     z-index: -1;
     text-align: center;
     position: absolute;
@@ -226,7 +231,7 @@ const Nav = styled.nav`
     background-color: rgb(60, 60, 60);
     box-shadow: 0px 0px 3px 0px black;
     border-radius: 5px;
-    padding: 15px 10px;
+    padding: 12px 8px;
     transition: all 0.2s;
     > li{
         list-style: none;
@@ -269,13 +274,12 @@ const Nav = styled.nav`
     width: 40%;
 }
 
-li {
-    padding: 2px 6px;
+.menuList{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-content: center;
     border-radius: 3px;
-    font-size: 15px;
-    font-weight: 600;
-    list-style: none;
-
     &:hover {
         cursor: pointer;
         background-color: white;
@@ -285,6 +289,17 @@ li {
     &:active {
         scale: 0.95;
     }
+}
+
+li {
+    padding: 2px 2.5px;
+    font-size: 15px;
+    font-weight: 500;
+    list-style: none;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
 }
 
 .hamburger-two{
