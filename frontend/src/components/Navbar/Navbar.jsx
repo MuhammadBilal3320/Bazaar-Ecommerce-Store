@@ -82,9 +82,14 @@ const Navbar = ({ setSideBar, setCurrentPage }) => {
                             {getUserMenuItems(isAuthenticated, user, handleLogout)
                                 .filter(item => item.show)
                                 .map((item, index) => (
-                                    <Link key={index} className="noUnderline menuList" to={item.path} onClick={item.onClick}>
+                                    <Link key={index} 
+                                    className={`noUnderline menuList ${item.label === "Logout" ? "logoutItem" : ""}`} 
+                                    to={item.path} 
+                                    onClick={item.onClick}>
+
                                         <li>{item.icon}</li>
                                         <li>{item.label}</li>
+
                                     </Link>
                                 ))}
                         </ul>
@@ -98,7 +103,7 @@ const Navbar = ({ setSideBar, setCurrentPage }) => {
                 </div>
                 <ul className={`menu ${mainDropDown ? "dropDown" : ""}`}>
                     {navItems.map((item, index) => (
-                        <Link key={index} to={item.path} className={`noUnderline ${selectedMenu === item.path ? "active" : ""}`}>
+                        <Link key={index} to={item.path} className={`noUnderline navMenu ${selectedMenu === item.path ? "active" : ""}`}>
                             <li onClick={() => { setSelectedMenu(item.path); setCurrentPage(1); }}>{item.name}</li>
                         </Link>
                     ))}
@@ -130,7 +135,7 @@ const Nav = styled.nav`
     color: black !important;
     background: white;
     border-radius: 5px;
-    padding: 2px 6px;
+    font-weight: 800;
 }
 
     .upperPart {
@@ -237,7 +242,7 @@ const Nav = styled.nav`
         list-style: none;
         text-align: center;
         font-size: medium;
-        font-weight: 600;
+
         cursor: pointer;
 
         &:hover{
@@ -274,6 +279,16 @@ const Nav = styled.nav`
     width: 40%;
 }
 
+.navMenu > li{
+    padding: 0px 5px;
+    font-size: 15px;
+    font-weight: 600;
+    list-style: none;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
 .menuList{
     width: 100%;
     display: flex;
@@ -291,7 +306,12 @@ const Nav = styled.nav`
     }
 }
 
-li {
+.logoutItem:hover{
+background-color: white;
+color: #ec0202ef;
+}
+
+.menuList > li {
     padding: 2px 2.5px;
     font-size: 15px;
     font-weight: 500;
@@ -299,7 +319,6 @@ li {
     display: flex;
     justify-content: start;
     align-items: center;
-
 }
 
 .hamburger-two{
