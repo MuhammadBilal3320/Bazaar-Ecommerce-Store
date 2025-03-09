@@ -7,14 +7,14 @@ import { FaShoppingBag, FaUser } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { AiOutlineLogout } from "react-icons/ai";
 import { useDispatch, useSelector } from 'react-redux';
+import { MdArrowDropDown } from "react-icons/md";
 import { userLogoutAction } from '../../actions/AuthenticationAction';
 
 // Navigation Items
 const navItems = [
     { path: "/", name: "HOME" },
     { path: "/product", name: "PRODUCT" },
-    { path: "/contact", name: "CONTACT" },
-    { path: "/about", name: "ABOUT" }
+    { path: "/contactUs", name: "CONTACT" },
 ];
 
 // User Menu Items (Dynamic Based on Authentication)
@@ -76,16 +76,16 @@ const Navbar = ({ setSideBar, setCurrentPage }) => {
                     </div>
                     <div className="userLogo-userMenu">
                         <div onClick={() => setUserDropDown(!userDropDown)} className="userLogo cursorPointer activeButton">
-                            <FaUser />
+                            <FaUser /><MdArrowDropDown />
                         </div>
                         <ul className={`userMenu ${userDropDown ? "userDropDown" : ""}`}>
                             {getUserMenuItems(isAuthenticated, user, handleLogout)
                                 .filter(item => item.show)
                                 .map((item, index) => (
-                                    <Link key={index} 
-                                    className={`noUnderline menuList ${item.label === "Logout" ? "logoutItem" : ""}`} 
-                                    to={item.path} 
-                                    onClick={item.onClick}>
+                                    <Link key={index}
+                                        className={`noUnderline menuList ${item.label === "Logout" ? "logoutItem" : ""}`}
+                                        to={item.path}
+                                        onClick={item.onClick}>
 
                                         <li>{item.icon}</li>
                                         <li>{item.label}</li>

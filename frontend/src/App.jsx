@@ -12,6 +12,7 @@ import EmailSentSuccessful from './components/Authentication/EmailSentSuccessful
 import ResetPasswordSuccessful from './components/Authentication/ResetPasswordSuccessful'
 import store from './store'
 import { userLoaderAction } from './actions/AuthenticationAction'
+import ContactPage from './components/ContactPage/ContactPage'
 
 
 const App = () => {
@@ -29,6 +30,7 @@ store.dispatch(userLoaderAction());
         <Route exact path='/product' element={<ProductPage />} ></Route>
         <Route exact path='/product/:keyword' element={<ProductPage />} ></Route>
         <Route exact path='/product/singleProduct/:id' element={<ProductDetails />} ></Route>
+        <Route exact path='/contactUs' element={<ContactPage />} ></Route>
       
       //Authentication
         <Route exact path='/registration' element={<RegistrationPage/>} ></Route>
