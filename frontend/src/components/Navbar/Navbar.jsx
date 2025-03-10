@@ -280,7 +280,7 @@ const Nav = styled.nav`
 }
 
 .navMenu > li{
-    padding: 0px 5px;
+    padding: 0px 8px;
     font-size: 15px;
     font-weight: 600;
     list-style: none;

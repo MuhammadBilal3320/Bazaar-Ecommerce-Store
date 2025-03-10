@@ -7,10 +7,11 @@ const ContactMain = () => {
         <>
             <MainContainer>
 
+                        <h1>Contact Us</h1>
                 <div className="container">
                     
                     <div className="leftContainer">
-                        <h1>Contact Us</h1>
+                        <img className='contactImage' src="public/images/contactus.png" alt="This is image"  />
                         <div className="contactParagraph">
                             <h3>Get in touch with us</h3>
                             <p>Have questions or need assistance? We're here to help! Reach out to us, and we'll get back to you as soon as possible.</p>
@@ -41,6 +42,12 @@ width: 100%;
 display: flex;
 justify-content: center;
 align-items: center;
+flex-direction: column;
+
+@media screen and (max-width: 550px) {
+    height: 100vh;
+    margin-bottom: 60px;
+    }
 
 
 .container{
@@ -73,8 +80,20 @@ align-items: center;
 }
 
 h1{
+    width: 70%;
+    text-align: start;
+    margin-top: 50px;
     font-size: 3rem;
-    color: #333;
+    font-weight: 600;
+}
+
+.contactImage{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    @media screen and (max-width: 550px) {
+        width: 80%;
+    }
 }
 
 .contactParagraph{
@@ -109,7 +128,7 @@ form{
     justify-content: center;
     align-items: center;
     width: 60%;
-    box-shadow: 0px 0px 2px #333;
+    box-shadow: 1px 1px 4px #333;
     padding: 30px 15px;
     border-radius: 10px;
     @media screen and (max-width: 1300px) {
@@ -120,6 +139,11 @@ form{
         justify-content: end;
         width: 80%;
     }
+    @media screen and (max-width: 550px) {
+    box-shadow: none;
+    width: 95%;
+    }
+    
 }
 
 input{
