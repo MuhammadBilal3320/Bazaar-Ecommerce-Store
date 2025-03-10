@@ -13,6 +13,8 @@ import ResetPasswordSuccessful from './components/Authentication/ResetPasswordSu
 import store from './store'
 import { userLoaderAction } from './actions/AuthenticationAction'
 import ContactPage from './components/ContactPage/ContactPage'
+import Dashboard from './components/LoginUserPages/Dashboard/Dashboard'
+import UserProfile from './components/LoginUserPages/UserProfile/UserProfile'
 
 
 const App = () => {
@@ -41,6 +43,8 @@ store.dispatch(userLoaderAction());
         <Route exact path='/resetPassword/:token' element={<ResetPasswordPage/>} ></Route>
         <Route exact path='/resetPasswordSuccessful' element={<ResetPasswordSuccessful/>} ></Route>
         <Route exact path='/logout' element={<HomePage/>} ></Route>
+        <Route exact path='/dashboard' element={<Dashboard/>} ></Route>
+        <Route exact path='/userProfile' element={<UserProfile/>} ></Route>
       </Routes>
     </BrowserRouter>
   )

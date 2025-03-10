@@ -18,11 +18,11 @@ const navItems = [
 ];
 
 // User Menu Items (Dynamic Based on Authentication)
-const getUserMenuItems = (isAuthenticated, user, handleLogout) => [
+const getUserMenuItems = (isAuthenticated, user, handleLogout, handleUserProfile) => [
     { path: "/registration", label: "Sign up", show: !isAuthenticated },
     { path: "/login", label: "Sign in", show: !isAuthenticated },
     { path: "/dashboard", label: "Dashboard", icon: <RiDashboardFill />, show: isAuthenticated && (user?.role === "admin" || user?.role === "master") },
-    { path: "/userProfile", label: "Profile", icon: <CgProfile />, show: isAuthenticated },
+    { path: "/userProfile", label: "Profile", icon: <CgProfile />, show: isAuthenticated, onClick: handleUserProfile },
     { path: "/logout", label: "Logout", icon: <AiOutlineLogout />, show: isAuthenticated, onClick: handleLogout }
 ];
 
@@ -62,6 +62,10 @@ const Navbar = ({ setSideBar, setCurrentPage }) => {
         window.location.reload();
     };
 
+    const handleUserProfile = ()=>{
+        setUserDropDown(false);
+    }
+
     return (
         <Nav>
             <div className="upperPart">
@@ -79,7 +83,7 @@ const Navbar = ({ setSideBar, setCurrentPage }) => {
                             <FaUser /><MdArrowDropDown />
                         </div>
                         <ul className={`userMenu ${userDropDown ? "userDropDown" : ""}`}>
-                            {getUserMenuItems(isAuthenticated, user, handleLogout)
+                            {getUserMenuItems(isAuthenticated, user, handleLogout, handleUserProfile)
                                 .filter(item => item.show)
                                 .map((item, index) => (
                                     <Link key={index}
@@ -231,7 +235,6 @@ const Nav = styled.nav`
     position: absolute;
     opacity: 0;
     right: -5px;
-    top: 20px;
     width: 130px;
     background-color: rgb(60, 60, 60);
     box-shadow: 0px 0px 3px 0px black;
