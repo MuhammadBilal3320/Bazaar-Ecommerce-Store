@@ -15,8 +15,9 @@ const MainContainer = styled.main`
     width: 100%;
 
     .ProfileHeading{
+        font-size: 40px;
         background-color: whitesmoke;
-        padding: 1rem;
+        padding: 20px 30px;
         font-weight: 600;
     }
 `;
