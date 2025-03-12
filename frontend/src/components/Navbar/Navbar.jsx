@@ -5,10 +5,12 @@ import { RiMenuUnfoldFill, RiDashboardFill } from "react-icons/ri";
 import { ImMenu3, ImSearch } from "react-icons/im";
 import { FaShoppingBag, FaUser } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
-import { AiOutlineLogout } from "react-icons/ai";
+import { MdOutlinePowerSettingsNew } from "react-icons/md";
+import { MdOutlineSettings } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
 import { MdArrowDropDown } from "react-icons/md";
 import { userLogoutAction } from '../../actions/AuthenticationAction';
+
 
 // Navigation Items
 const navItems = [
@@ -22,8 +24,8 @@ const getUserMenuItems = (isAuthenticated, user, handleLogout, handleUserProfile
     { path: "/registration", label: "Sign up", show: !isAuthenticated },
     { path: "/login", label: "Sign in", show: !isAuthenticated },
     { path: "/dashboard", label: "Dashboard", icon: <RiDashboardFill />, show: isAuthenticated && (user?.role === "admin" || user?.role === "master") },
-    { path: "/userProfile", label: "Profile", icon: <CgProfile />, show: isAuthenticated, onClick: handleUserProfile },
-    { path: "/logout", label: "Logout", icon: <AiOutlineLogout />, show: isAuthenticated, onClick: handleLogout }
+    { path: "/userProfile", label: "Setting", icon: <MdOutlineSettings />, show: isAuthenticated, onClick: handleUserProfile },
+    { path: "/logout", label: "Logout", icon: <MdOutlinePowerSettingsNew />, show: isAuthenticated, onClick: handleLogout }
 ];
 
 const Navbar = ({ setSideBar, setCurrentPage }) => {

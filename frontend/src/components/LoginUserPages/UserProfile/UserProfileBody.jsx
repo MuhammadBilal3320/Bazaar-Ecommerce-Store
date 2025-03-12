@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const UserProfileBody = () => {
     return (
         <MainContainer>
-            <h1 className='ProfileHeading'>My Profile</h1>
+            <h1 className='ProfileHeading'>My Account</h1>
         </MainContainer>
     )
 }
@@ -17,7 +17,8 @@ const MainContainer = styled.main`
     .ProfileHeading{
         font-size: 40px;
         background-color: whitesmoke;
-        padding: 20px 30px;
+        padding: 10px 30px;
         font-weight: 600;
+        margin-bottom: 5px;
     }
 `;

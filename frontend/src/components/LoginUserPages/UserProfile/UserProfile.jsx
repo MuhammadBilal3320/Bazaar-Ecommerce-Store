@@ -19,5 +19,5 @@ const UserProfile = () => {
 export default UserProfile
 
 const MainContainer = styled.div`
-    
+    user-select: none;
 `;

@@ -1,32 +1,63 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { useState } from 'react';
+import styled from 'styled-components';
 import { FaUserCircle } from "react-icons/fa";
 import { FaShoppingBag } from "react-icons/fa";
 import { TbStarFilled } from "react-icons/tb";
+import UserProfileContents from './UserProfileInnerAsidebar/UserProfileContents';
 
 const UserProfileAsidebar = () => {
+    const [activeTab, setActiveTab] = useState("profile");
+
+    const menuItems = [
+        { id: "profile", name: "My Profile", icon: <FaUserCircle />, content: <ProfileContent /> },
+        { id: "orders", name: "My Orders", icon: <FaShoppingBag />, content: <OrdersContent /> },
+        { id: "wishlist", name: "My Wishlist", icon: <TbStarFilled />, content: <WishlistContent /> }
+    ];
+
     return (
-        <MainContainer>
-            <div className="container">
-                <ul className="sideBarMenuList">
-                    <li><span className='listIcon'><FaUserCircle /></span><span className='listName'>My Profile</span></li>
-                    <li><span className='listIcon'><FaShoppingBag /></span><span className='listName'>My Orders</span></li>
-                    <li><span className='listIcon'><TbStarFilled /></span><span className='listName'>My Wishlist</span></li>
-                </ul>
-            </div>
-        </MainContainer>
-    )
-}
+        <MainWrapper>
+            <AsideContainer>
+                <div className="container">
+                    <ul className="sideBarMenuList">
+                        {menuItems.map(item => (
+                            <li 
+                                key={item.id} 
+                                className={activeTab === item.id ? "active" : ""} 
+                                onClick={() => setActiveTab(item.id)}
+                            >
+                                <span className='listIcon'>{item.icon}</span>
+                                <span className='listName'>{item.name}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </AsideContainer>
+            <ContentContainer>
+                {menuItems.find(item => item.id === activeTab)?.content}
+            </ContentContainer>
+        </MainWrapper>
+    );
+};
 
-export default UserProfileAsidebar
+const ProfileContent = () => <UserProfileContents/>;
+const OrdersContent = () => <div><h2>My Orders</h2><p>Order details go here...</p></div>;
+const WishlistContent = () => <div><h2>My Wishlist</h2><p>Wishlist items go here...</p></div>;
 
-const MainContainer = styled.aside`
+export default UserProfileAsidebar;
+
+const MainWrapper = styled.div`
+    display: flex;
     height: 90vh;
-    width: 15%;
-    background-color: whitesmoke;
+    margin-bottom: 5px;
+`;
+
+const AsideContainer = styled.aside`
+    width: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 5px;
+    margin-right: 5px;
 
     .container{
         display: flex;
@@ -35,12 +66,11 @@ const MainContainer = styled.aside`
         height: 100%;
         width: 100%;
         padding: 20px;
+        background-color: whitesmoke;
     }
 
     .sideBarMenuList{
         display: flex;
-        justify-content: center;
-        align-items: center;
         flex-direction: column;
         list-style: none;
         padding: 0;
@@ -49,39 +79,40 @@ const MainContainer = styled.aside`
     }
 
     .sideBarMenuList li {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; /* Align content to the start */
-    cursor: pointer;
-    padding: 10px 15px; /* Increased padding for better spacing */
-}
+        width: 100%;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        padding: 10px 15px;
+        transition: all 0.2s ease-in-out;
+        margin: 1px 0px;
+    }
 
-    .sideBarMenuList li:hover{
+    .sideBarMenuList li:hover, .sideBarMenuList li.active {
         background-color: rgb(60, 60, 60);
         color: white;
         border-radius: 5px;
     }
 
-    .sideBarMenuList li:active{
-        transform: scale(0.96);
-        transition: all 0.2s ease-in-out;
-    }
-
     .listIcon{
-    font-size: 20px;
-    display: flex;
-    justify-content: center; /* Align the text/icons to the start */
-    align-items: center;
-    width: 20%;
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20%;
     }
 
     .listName{
-    font-size: large;
-    display: flex;
-    justify-content: flex-start; /* Align the text/icons to the start */
-    align-items: center;
-    width: 80%;
+        font-size: large;
+        display: flex;
+        align-items: center;
+        width: 80%;
     }
+`;
 
+const ContentContainer = styled.div`
+    width: 80%;
+    padding: 20px;
+    background: whitesmoke;
+    margin-top: 5px;
 `;
