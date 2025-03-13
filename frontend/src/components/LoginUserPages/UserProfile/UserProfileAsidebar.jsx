@@ -7,7 +7,7 @@ import UserProfileContents from './UserProfileInnerAsidebar/UserProfileContents'
 
 const UserProfileAsidebar = () => {
     const [activeTab, setActiveTab] = useState("profile");
-
+    
     const menuItems = [
         { id: "profile", name: "My Profile", icon: <FaUserCircle />, content: <ProfileContent /> },
         { id: "orders", name: "My Orders", icon: <FaShoppingBag />, content: <OrdersContent /> },
@@ -49,6 +49,11 @@ const MainWrapper = styled.div`
     display: flex;
     height: 90vh;
     margin-bottom: 5px;
+    
+    @media (max-width: 970px) {
+        flex-direction: column;
+        height: 78vh;
+    }
 `;
 
 const AsideContainer = styled.aside`
@@ -58,7 +63,7 @@ const AsideContainer = styled.aside`
     align-items: center;
     margin-top: 5px;
     margin-right: 5px;
-
+    
     .container{
         display: flex;
         justify-content: center;
@@ -108,6 +113,26 @@ const AsideContainer = styled.aside`
         align-items: center;
         width: 80%;
     }
+
+    @media (max-width: 970px) {
+        width: 100%;
+        .container {
+            padding: 10px;
+        }
+        .sideBarMenuList {
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        .sideBarMenuList li {
+            flex-direction: column;
+            align-items: center;
+            padding: 8px;
+        }
+        .listName {
+            font-size: small;
+            justify-content: center;
+        }
+    }
 `;
 
 const ContentContainer = styled.div`
@@ -115,4 +140,8 @@ const ContentContainer = styled.div`
     padding: 20px;
     background: whitesmoke;
     margin-top: 5px;
+    
+    @media (max-width: 970px) {
+        width: 100%;
+    }
 `;

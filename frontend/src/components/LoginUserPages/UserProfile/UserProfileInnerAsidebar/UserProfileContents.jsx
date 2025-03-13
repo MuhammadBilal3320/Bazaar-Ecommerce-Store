@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import styled from 'styled-components';
 import { FaUserCircle} from "react-icons/fa";
 import { RiImageEditFill } from "react-icons/ri";
+import { useSelector } from 'react-redux';
 
 const Profile = () => {
     const [profileImage, setProfileImage] = useState(null);
+    const {user} = useSelector(state => state.userLoader);
+
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
@@ -17,6 +20,25 @@ const Profile = () => {
             reader.readAsDataURL(file);
         }
     };
+
+// Initial Value Set in Real Time
+const [userDataFetcher, setUserDataFetcher] = useState({
+    name: "",
+    email: "",
+    password: "",
+})
+
+useEffect(() => {
+if(user){
+    setUserDataFetcher({
+        name: user.userName,
+        email: user.email,
+        password: "",
+    })
+}
+}, [user])
+
+
 
     return (
         <ProfileContainer>
@@ -30,7 +52,8 @@ const Profile = () => {
                     <input id="fileInput" type="file" accept="image/*" onChange={handleImageChange} />
                 </ProfilePicture>
                 <Formik
-                    initialValues={{ name: "John Doe", email: "johndoe@example.com", password: "" }}
+                enableReinitialize
+                    initialValues={userDataFetcher}
                     onSubmit={(values) => {
                         console.log("Updated Profile Data:", values);
                         alert("Profile updated successfully!");
@@ -74,10 +97,16 @@ const ProfileContainer = styled.div`
 `;
 
 const ProfileContent = styled.div`
+    margin-top: 80px;
+    width: 70%;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 15px;
+    @media (max-width: 970px) {
+        width: 100%;
+        margin-top: 50px;
+    }
 `;
 
 const ProfilePicture = styled.div`

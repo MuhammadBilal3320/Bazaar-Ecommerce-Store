@@ -347,7 +347,7 @@ color: #ec0202ef;
 
     .menu {
         display: block;
-        width: 180px;
+        width: 120px;
         text-align: center;
         background-color: rgb(60, 60, 60);
         position: absolute;
@@ -355,9 +355,13 @@ color: #ec0202ef;
         opacity: 0;
         top: 50px;
         left: 30px;
-        border-radius: 20px;
+        border-radius: 5px;
         overflow: hidden;
         box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
 
         >li {
             padding: 5px;

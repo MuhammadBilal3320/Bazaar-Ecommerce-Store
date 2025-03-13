@@ -15,7 +15,7 @@ import { userLoaderAction } from './actions/AuthenticationAction'
 import ContactPage from './components/ContactPage/ContactPage'
 import Dashboard from './components/LoginUserPages/Dashboard/Dashboard'
 import UserProfile from './components/LoginUserPages/UserProfile/UserProfile'
-import RouteProtector from './RouteProtector'
+import RouteProtector from './components/RouteProtector'
 
 
 const App = () => {
