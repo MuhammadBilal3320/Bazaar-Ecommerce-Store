@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import styled from 'styled-components';
-import { FaUserCircle} from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
 import { RiImageEditFill } from "react-icons/ri";
 import { useSelector } from 'react-redux';
+import * as Yup from 'yup';
 
 const Profile = () => {
     const [profileImage, setProfileImage] = useState(null);
-    const {user} = useSelector(state => state.userLoader);
+    const { user } = useSelector(state => state.userLoader);
 
 
     const handleImageChange = (event) => {
@@ -21,24 +22,30 @@ const Profile = () => {
         }
     };
 
-// Initial Value Set in Real Time
-const [userDataFetcher, setUserDataFetcher] = useState({
-    name: "",
-    email: "",
-    password: "",
-})
-
-useEffect(() => {
-if(user){
-    setUserDataFetcher({
-        name: user.userName,
-        email: user.email,
+    // Initial Value Set in Real Time
+    const [userDataFetcher, setUserDataFetcher] = useState({
+        name: "",
+        email: "",
         password: "",
     })
-}
-}, [user])
+
+    useEffect(() => {
+        if (user) {
+            setUserDataFetcher({
+                name: user.userName,
+                email: user.email,
+                password: "",
+            })
+        }
+    }, [user])
 
 
+    // Validation Schema for Formik
+    const validationSchema = Yup.object().shape({
+        name: Yup.string().required("User Name is required"),
+        email: Yup.string().email("Invalid email").required("Email is required"),
+        password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
+    })
 
     return (
         <ProfileContainer>
@@ -52,7 +59,8 @@ if(user){
                     <input id="fileInput" type="file" accept="image/*" onChange={handleImageChange} />
                 </ProfilePicture>
                 <Formik
-                enableReinitialize
+                    enableReinitialize
+                    validationSchema={validationSchema}
                     initialValues={userDataFetcher}
                     onSubmit={(values) => {
                         console.log("Updated Profile Data:", values);
@@ -63,15 +71,18 @@ if(user){
                         <ProfileForm as={Form}>
                             <label>
                                 User Name
-                                <Field type="text" name="name" value={values.name} onChange={handleChange} required />
+                                <Field type="text" name="name" value={values.name} onChange={handleChange} />
+                                <ErrorMessage name="name" component={"p"} className='errorMessage' />
                             </label>
                             <label>
                                 Email
-                                <Field type="email" name="email" value={values.email} onChange={handleChange} required />
+                                <Field type="email" name="email" value={values.email} onChange={handleChange} />
+                                <ErrorMessage name="email" component={"p"} className='errorMessage' />
                             </label>
                             <label>
                                 Password
-                                <Field type="password" name="password" value={values.password} onChange={handleChange} required />
+                                <Field type="password" name="password" value={values.password} onChange={handleChange} />
+                                <ErrorMessage name="password" component={"p"} className='errorMessage'  />
                             </label>
                             <button type="submit">Save Changes</button>
                         </ProfileForm>
@@ -191,5 +202,13 @@ const ProfileForm = styled(Form)`
 
     button:hover {
         background-color: rgb(80, 80, 80);
+    }
+
+    .errorMessage{
+        color: #c20404dc;
+        font-size: 12px;
+        margin-left: 5px;
+        margin-top: 3px;
+        text-align: start;
     }
 `;
